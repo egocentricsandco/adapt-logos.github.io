@@ -1,0 +1,70 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  cursor: crosshair;
+}
+
+canvas {
+  display: block;
+}
+
+a {
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: crosshair;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.aInText {
+  color: #0000FF;
+}
+
+.nav {
+  text-align: center;
+}
+
+.menu {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+
+  color: black;
+} 
+
+.menuHere{
+  color: #0000FF;
+}
+
+.text {
+  position: absolute;
+  bottom: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  color: black;
+}
