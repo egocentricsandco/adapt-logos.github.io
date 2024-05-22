@@ -15,12 +15,12 @@ function setup() {
 
   let i = x / 2;
   let j = y / 2;
-  etc1 = font.textToPoints("adapt", i, j + 500, txtSize);
+  etc1 = font.textToPoints("adapt", i, j + windowHeight / 1.8, txtSize);
 }
 
 function draw() {
   background(255);
-  noCursor();
+  cursor(CROSS, mouseX, mouseY);
   for (let i = 0; i < etc1.length; i++) {
     let pt = etc1[i];
     let a = 0;
@@ -31,12 +31,16 @@ function draw() {
 
     if (distToMouse < rotationRadius) {
       // If the point is within the rotation radius, calculate the rotation angle
-      let angle = atan2(pt.y * mouseY * height / 2, pt.x * mouseX * width / 2) + a;
+      let angle =
+        atan2((pt.y * mouseY * height) / 2, (pt.x * mouseX * width) / 2) + a;
       let rotatedX = pt.x + cos(angle) * rotationRadius;
       let rotatedY = pt.y + sin(angle) * rotationRadius;
 
       // Calculate the angle of rotation for the square
-      let squareAngle = atan2(rotatedY - pt.y * mouseY - 1, rotatedX - pt.x * mouseX - 1);
+      let squareAngle = atan2(
+        rotatedY - pt.y * mouseY - 1,
+        rotatedX - pt.x * mouseX - 1
+      );
 
       push(); // Save the current drawing state
       translate(pt.x, pt.y); // Move the origin to the point
@@ -45,7 +49,7 @@ function draw() {
       fill(c);
       noStroke();
       rectMode(CENTER);
-      rect(0, 0, 32, 32);
+      rect(0, 0, 35, 35);
       pop(); // Restore the previous drawing state
     } else {
       // If the point is outside the rotation radius, draw the square at its original position
@@ -53,14 +57,11 @@ function draw() {
       fill(c);
       noStroke();
       rectMode(CENTER);
-      rect(pt.x + 10, pt.y + 10, 15, 15);
+      rect(pt.x, pt.y, 15, 15);
     }
   }
-
-  fill(0, 0, 255);
-  ellipse(mouseX, mouseY, 22, 22);
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-  }
+  resizeCanvas(windowWidth - 100, windowHeight - 100);
+}

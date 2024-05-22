@@ -1,8 +1,8 @@
-
 let font;
 let etc1 = [];
 let vehicles = [];
 let txtSize = 500;
+
 function preload() {
   font = new loadFont("sfpro.otf");
 }
@@ -16,7 +16,7 @@ function setup() {
   let i = x / 2;
   let j = y / 2;
 
-  etc1 = font.textToPoints("adapt", i, j + 500, txtSize);
+  etc1 = font.textToPoints("adapt", i, j + windowHeight / 1.8, txtSize);
 
   for (i = 0; i < etc1.length; i++) {
     let pt = etc1[i];
@@ -31,7 +31,7 @@ function setup() {
 
 function draw() {
   background(255);
-  noCursor();
+  cursor(CROSS, mouseX, mouseY);
   //fill(255, 0, 0);
   //ellipse(mouseX, mouseY, 20, 20);
   for (let i = 0; i < vehicles.length; i++) {
@@ -41,11 +41,8 @@ function draw() {
     v.update();
     v.show();
   }
-
-  fill(0, 0, 255);
-  ellipse(mouseX, mouseY, 22, 22);
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-  }
+  resizeCanvas(windowWidth - 100, windowHeight - 100);
+}

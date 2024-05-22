@@ -1,2 +1,1 @@
 # adapt-logos.github.io
-
