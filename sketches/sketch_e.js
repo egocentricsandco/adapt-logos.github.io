@@ -7,22 +7,32 @@ function preload() {
   font = new loadFont("sfpro.otf");
 }
 
-function setup() {
-  let cnv = createCanvas(windowWidth - 100, windowHeight - 100);
+function typeResized(size) {
+  let aspectRatio = windowWidth / windowHeight;
+  let reSize = aspectRatio * size;
+  return reSize;
+}
+
+function textInChange() {
   let x = (windowWidth - width) / 2;
   let y = (windowHeight - height) / 2;
-  cnv.position(x, y);
+  let txtSize = typeResized(370);
+  etc = font.textToPoints(word, x, y + windowHeight / 1.8, txtSize);
 
-  let txtSize = 500;
-  let i = x / 2;
-  let j = y / 2;
-  etc = font.textToPoints(word, i, j + windowHeight / 1.8, txtSize);
-
+  vehicles = [];
   for (i = 0; i < etc.length; i++) {
     let pt = etc[i];
     let r = new Vehicle(pt.x, pt.y);
     vehicles.push(r);
   }
+}
+
+function setup() {
+  const cnv = createCanvas(windowWidth, windowHeight - 100);
+  let x = (windowWidth - width) / 2;
+  let y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+  textInChange();
 }
 
 function draw() {
@@ -38,5 +48,6 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth - 100, windowHeight - 100);
+  resizeCanvas(windowWidth, windowHeight - 100);
+  textInChange();
 }

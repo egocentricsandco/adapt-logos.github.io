@@ -1,28 +1,38 @@
 let font;
-let etc1 = [];
-let txtSize = 500;
+let etc = [];
 let rotationRadius = 100;
+let word = "adapt";
 
 function preload() {
   font = loadFont("sfpro.otf");
 }
 
+function typeResized(size) {
+  let aspectRatio = windowWidth / windowHeight;
+  let reSize = aspectRatio * size;
+  return reSize;
+}
+
+function textInChange() {
+  let x = (windowWidth - width) / 2;
+  let y = (windowHeight - height) / 2;
+  let txtSize = typeResized(370);
+  etc = font.textToPoints(word, x + 55, y + windowHeight / 1.8, txtSize);
+}
+
 function setup() {
-  let cnv = createCanvas(windowWidth - 100, windowHeight - 100);
+  let cnv = createCanvas(windowWidth, windowHeight - 100);
   let x = (windowWidth - width) / 2;
   let y = (windowHeight - height) / 2;
   cnv.position(x, y);
-
-  let i = x / 2;
-  let j = y / 2;
-  etc1 = font.textToPoints("adapt", i, j + windowHeight / 1.8, txtSize);
+  textInChange();
 }
 
 function draw() {
   background(255);
   cursor(CROSS, mouseX, mouseY);
-  for (let i = 0; i < etc1.length; i++) {
-    let pt = etc1[i];
+  for (let i = 0; i < etc.length; i++) {
+    let pt = etc[i];
     let a = 0;
     a = a * 500;
 
@@ -63,5 +73,6 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth - 100, windowHeight - 100);
+  resizeCanvas(windowWidth, windowHeight - 100);
+  textInChange();
 }
